@@ -3,24 +3,26 @@ import scala.language.postfixOps
 
 lazy val indigoVersion = IndigoVersion.getVersion
 
-val scala2 = "2.13.4"
+val dottyVersion    = "0.27.0-RC1"
+val scala213Version = "2.13.4"
 
 lazy val commonSettings = Seq(
   version := indigoVersion,
-  scalaVersion := scala2,
+  scalaVersion := dottyVersion,
   organization := "io.indigoengine",
   libraryDependencies ++= Seq(
-    "com.lihaoyi" %%% "utest" % "0.7.4" % "test"
+    "com.lihaoyi" %% "utest" % "0.7.5" % "test"
   ),
   testFrameworks += new TestFramework("utest.runner.Framework"),
-  scalacOptions in (Compile, doc) ++= Seq("-groups", "-implicits"),
-  scalacOptions in (Compile, compile) ++= Scalac213Options.scala213Compile,
-  scalacOptions in (Test, test) ++= Scalac213Options.scala213Test,
-  wartremoverWarnings in (Compile, compile) ++= Warts.allBut(
-    Wart.Overloading,
-    Wart.ImplicitParameter
-  ),
-  scalacOptions += "-Yrangepos"
+  // scalacOptions in (Compile, doc) ++= Seq("-groups", "-implicits"),
+  // scalacOptions in (Compile, compile) ++= Scalac213Options.scala213Compile,
+  // scalacOptions in (Test, test) ++= Scalac213Options.scala213Test,
+  // wartremoverWarnings in (Compile, compile) ++= Warts.allBut(
+  //   Wart.Overloading,
+  //   Wart.ImplicitParameter
+  // ),
+  // scalacOptions += "-Yrangepos",
+  crossScalaVersions := Seq(dottyVersion, scala213Version)
 )
 
 lazy val publishSettings = {
@@ -75,7 +77,7 @@ lazy val perf =
     )
     .dependsOn(indigo)
     .dependsOn(indigoExtras)
-    .dependsOn(indigoJsonCirce)
+    // .dependsOn(indigoJsonCirce)
 
 // Indigo
 lazy val indigoCore =
@@ -85,10 +87,10 @@ lazy val indigoCore =
     .settings(commonSettings: _*)
     .settings(publishSettings: _*)
     .settings(
-      name := "indigo-core",
-      libraryDependencies ++= Seq(
-        "org.scalacheck" %%% "scalacheck" % "1.14.3" % "test"
-      )
+      name := "indigo-core"//,
+      // libraryDependencies ++= Seq(
+      //   "org.scalacheck" %% "scalac0heck" % "1.14.3" % "test"
+      // )
     )
     .dependsOn(shared)
     .dependsOn(indigoPlatforms)
@@ -102,8 +104,8 @@ lazy val indigoExtras =
     .settings(publishSettings: _*)
     .dependsOn(shared)
     .settings(
-      name := "indigo-extras",
-      libraryDependencies += "org.scalacheck" %%% "scalacheck" % "1.14.3" % "test"
+      name := "indigo-extras"//,
+      // libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.14.3" % "test"
     )
 
 // Indigo Game
@@ -115,8 +117,8 @@ lazy val indigo =
     .settings(publishSettings: _*)
     .dependsOn(indigoCore)
     .settings(
-      name := "indigo",
-      libraryDependencies += "org.scalacheck" %%% "scalacheck" % "1.14.3" % "test"
+      name := "indigo"//,
+      // libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.14.3" % "test"
     )
 
 // Indigo Facades
@@ -128,12 +130,12 @@ lazy val facades =
     .settings(
       name := "facades",
       version := indigoVersion,
-      scalaVersion := scala2,
+      scalaVersion := dottyVersion,
       organization := "io.indigoengine",
-      scalacOptions += "-Yrangepos",
+      // scalacOptions += "-Yrangepos",
       scalacOptions in (Compile, doc) ++= Seq("-groups", "-implicits"),
       libraryDependencies ++= Seq(
-        "org.scala-js" %%% "scalajs-dom" % "1.0.0"
+        // "org.scala-js" %%% "scalajs-dom" % "1.1.0"
       )
     )
 
@@ -147,8 +149,8 @@ lazy val indigoPlatforms =
     .settings(
       name := "indigo-platforms",
       libraryDependencies ++= Seq(
-        "org.scalacheck" %%% "scalacheck"  % "1.14.3" % "test",
-        "org.scala-js"   %%% "scalajs-dom" % "1.0.0"
+        // "org.scalacheck" %% "scalacheck"  % "1.14.3" % "test",
+        // "org.scala-js"   %%% "scalajs-dom" % "1.1.0"
       )
     )
     .settings(
@@ -206,7 +208,8 @@ lazy val indigoProject =
     .aggregate(
       shared,
       indigoPlatforms,
-      indigoJsonCirce,
+      // indigoJsonCirce,
+      // indigoJsonUPickle,
       indigoCore,
       indigoExtras,
       indigo,
