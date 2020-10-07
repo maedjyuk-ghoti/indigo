@@ -43,6 +43,8 @@ object TiledMapTests extends TestSuite {
             case (i, TileTypes.Solid) if i != 0 => true
             case (i, TileTypes.Empty) if i != 0 => false
             case (i, TileTypes.Solid) if i == 0 => false
+              case _ =>
+                throw new Exception("Failed")
           }
 
           val actual =

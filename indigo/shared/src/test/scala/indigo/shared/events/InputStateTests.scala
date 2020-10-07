@@ -309,7 +309,7 @@ object InputStateTests extends TestSuite {
         "keyboard combo not found" - {
 
           val mappings: InputMapping[Int] =
-            InputMapping[Int]
+            InputMapping[Int]()
               .add(
                 Combo.KeyInputs(Key.UP_ARROW) -> 10
               )
@@ -344,7 +344,7 @@ object InputStateTests extends TestSuite {
         "mouse combo not found" - {
 
           val mappings: InputMapping[Int] =
-            InputMapping[Int]
+            InputMapping[Int]()
               .add(
                 Combo.MouseInputs(MouseInput.MouseUp) -> 10
               )
@@ -381,7 +381,7 @@ object InputStateTests extends TestSuite {
         "gamepad combo not found" - {
 
           val mappings: InputMapping[Int] =
-            InputMapping[Int]
+            InputMapping[Int]()
               .add(
                 Combo.GamepadInputs(GamepadInput.Triangle) -> 10
               )

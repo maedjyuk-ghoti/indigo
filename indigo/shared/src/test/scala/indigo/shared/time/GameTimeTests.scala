@@ -16,7 +16,7 @@ object GameTimeTests extends TestSuite {
 
           val gameTime: GameTime = GameTime(Seconds.zero, Seconds.zero, targetFPS = FPS(30))
 
-          Math.round(gameTime.frameDuration.value) ==> 33
+          Math.round(gameTime.frameDuration.value.toFloat) ==> 33
 
         }
 
