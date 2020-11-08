@@ -77,6 +77,25 @@ lazy val perf =
     .dependsOn(indigoExtras)
     .dependsOn(indigoJsonCirce)
 
+lazy val group =
+  project
+    .enablePlugins(ScalaJSPlugin)
+    .enablePlugins(SbtIndigo)
+    .settings(commonSettings: _*)
+    .settings(
+      name := "group",
+      showCursor := true,
+      title := "Group",
+      gameAssetsDirectory := "assets"
+    )
+    .settings(
+      publish := {},
+      publishLocal := {}
+    )
+    .dependsOn(indigo)
+    .dependsOn(indigoExtras)
+    .dependsOn(indigoJsonCirce)
+
 // Indigo
 lazy val indigoCore =
   project
@@ -228,7 +247,8 @@ lazy val indigoProject =
       indigo,
       facades,
       sandbox,
-      perf
+      perf,
+      group
     )
 
 lazy val code =

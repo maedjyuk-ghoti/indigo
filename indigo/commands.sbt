@@ -13,7 +13,8 @@ lazy val releaseProjects: List[String] =
 lazy val coreProjects: List[String] =
   releaseProjects ++ List(
     "sandbox",
-    "perf"
+    "perf",
+    "group"
   )
 
 def applyCommand(projects: List[String], command: String): String =
@@ -165,5 +166,14 @@ addCommandAlias(
     "testAllNoClean",
     "indigoPublishAllSigned",
     "sonatypeBundleRelease"
+  ).mkString(";", ";", "")
+)
+
+addCommandAlias(
+  "groupRun",
+  List(
+    "buildAllNoClean",
+    "group/fastOptJS",
+    "group/indigoRun"
   ).mkString(";", ";", "")
 )
