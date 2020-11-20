@@ -11,7 +11,7 @@ lazy val commonSettings = Seq(
   scalaVersion := dottyVersion,
   organization := "io.indigoengine",
   libraryDependencies ++= Seq(
-    "com.lihaoyi" %% "utest" % "0.7.5" % "test"
+    ("com.lihaoyi" %% "utest" % "0.7.5" % "test").withDottyCompat(scalaVersion.value)
   ),
   testFrameworks += new TestFramework("utest.runner.Framework"),
   // scalacOptions in (Compile, doc) ++= Seq("-groups", "-implicits"),
