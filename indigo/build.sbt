@@ -77,7 +77,7 @@ lazy val perf =
     )
     .dependsOn(indigo)
     .dependsOn(indigoExtras)
-    // .dependsOn(indigoJsonCirce)
+    .dependsOn(indigoJsonCirce)
 
 // Indigo
 lazy val indigoCore =
@@ -208,14 +208,13 @@ lazy val indigoProject =
     .aggregate(
       shared,
       indigoPlatforms,
-      // indigoJsonCirce,
-      // indigoJsonUPickle,
+      indigoJsonCirce,
       indigoCore,
       indigoExtras,
       indigo,
       facades,
-      // sandbox,
-      // perf
+      sandbox,
+      perf
     )
 
 lazy val code =
